@@ -1,0 +1,33 @@
+.title {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.form {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.row {
+  margin: 10px 0;
+}
+
+.inline {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.display-row {
+  margin-left: 20px;
+}
+
+.hint {
+  margin-top: 10px;
+  color: blue;
+}
+
+.field-error {
+  border: 2px solid red
+}

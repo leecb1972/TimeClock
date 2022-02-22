@@ -1,0 +1,41 @@
+<div class="title">Begin to register</div>
+
+<form class="form" [formGroup]="registerForm">
+  <div class="row">
+    <label class="">First Name:</label>
+    <div class="inline">
+      <input type="text" formControlName="firstName" name="firstName"  [ngClass]="{'field-error': firstNameCtrl.invalid && submitted}"/>
+      <span *ngIf="firstNameCtrl.invalid && submitted" class="hint">
+        The min length of first name is two.
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <label class="">Last Name:</label>
+    <div class="inline">
+      <input type="text" formControlName="lastName" name="lastName" [ngClass]="{'field-error': lastNameCtrl.invalid && submitted}"/>
+      <span *ngIf="lastNameCtrl.invalid && submitted" class="hint">
+        The min length of last name is two.
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <label class="">User Id:</label>
+    <div class="inline">
+      <input type="text" formControlName="userId" name="userId" [ngClass]="{'field-error': userIdCtrl.invalid && submitted}"/>
+      <span *ngIf="userIdCtrl.invalid && submitted" class="hint">
+        The min length of user Id is two.
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <button type="button" class="row-left-margin" [disabled]="submitted" (click)="submit()">Submit</button>
+  </div>
+</form>
+
+<div *ngIf="submitted && user && user.userId">
+  <div class="title">The user {{user.firstName}} {{user.lastName}} is just created. You can search by {{user.userId}} to add work shift.</div>
+  <div class="display-row">
+    <app-user [user]="user"></app-user>
+  </div>
+</div>

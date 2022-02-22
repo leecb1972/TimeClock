@@ -1,0 +1,45 @@
+<p class="title">You can search by User Id to start your work shift. You can register yourself by clicking Register button if you have no User Id yet.</p>
+
+<form class="form" [formGroup]="workShiftForm" (ngSubmit)="search()">
+  <div>
+    <input type="text"
+         placeholder="User Id"
+         [ngClass]="{'field-error': userIdCtrl.invalid && searchTriggered}"
+         formControlName="userId" name="userId"/>
+    <button type="button" class="row-left-margin" (click)="search()">Search</button>
+    <button *ngIf="allowRegister || !registerTriggered" type="button" class="row-left-margin" [disabled]="user" (click)="register()">Register</button>
+    <div *ngIf="userIdCtrl.invalid && searchTriggered; else registerHint" class="hint">
+      The min length of User Id is two. Please make sure you have the correct User id.
+    </div>
+    <ng-template #registerHint>
+      <div *ngIf="allowRegister" class="hint">
+        The User Id is not found. You can try different User Id or register to add work shifts.
+      </div>
+    </ng-template>
+  </div>
+
+
+  <div *ngIf="user">
+    <app-user [user]="user"></app-user>
+    <div class="empty-row"></div>
+
+    <div class="row-top-margin">
+      <button type="button" (click)="startWorkShift()" [disabled]="hasActiveShift">Start Work Shift</button>
+      <button type="button" class="row-left-margin" (click)="stopWorkShift()" [disabled]="!hasActiveShift || hasActiveBreak || hasActiveLunchBreak">Stop Work Shift</button>
+    </div>
+
+    <div class="row-top-margin" *ngIf="hasActiveShift && !hasActiveLunchBreak">
+      <button type="button" (click)="startBreak()" [disabled]="hasActiveBreak">Start Break</button>
+      <button type="button" class="row-left-margin" (click)="stopBreak()" [disabled]="!hasActiveBreak">Stop Break</button>
+    </div>
+
+    <div class="row-top-margin" *ngIf="hasActiveShift && !hasActiveBreak">
+      <button type="button" (click)="startLunchBreak()" [disabled]="hasActiveLunchBreak">Start Lunch Break</button>
+      <button type="button" class="row-left-margin" (click)="stopLunchBreak()" [disabled]="!hasActiveLunchBreak">Stop Lunch Break</button>
+    </div>
+
+  </div>
+</form>
+<div class="empty-row"></div>
+
+<register *ngIf="registerTriggered"></register>

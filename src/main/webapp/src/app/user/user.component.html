@@ -1,0 +1,24 @@
+<div class="row-top-margin">First Name: {{user.firstName}}</div>
+<div>Last Name: {{user.lastName}}</div>
+<div>User Id: {{user.userId}}</div>
+<div *ngFor="let workShift of user.workShifts; let i = index;">
+  <div class="row-title">Shift {{i}} </div>
+  <div class="row">
+    <div class="inline-left">Shift Start Date: {{showDateTime(workShift.startTime)}}</div>
+    <div class="inline">Shift End Date: {{showDateTime(workShift.endTime)}}</div>
+  </div>
+  <div *ngIf="workShift.breaks" class="row-left-margin">Breaks: </div>
+  <div *ngFor="let break of workShift.breaks" class="row-left-margin">
+    <div class="row">
+      <div class="inline-left">Break Start Date: {{showDateTime(break.startTime)}}</div>
+      <div class="inline">Break End Date: {{showDateTime(break.endTime)}}</div>
+    </div>
+  </div>
+  <div *ngIf="workShift.lunchBreaks" class="row-left-margin">Lunch Breaks: </div>
+  <div *ngFor="let lunchBreak of workShift.lunchBreaks" class="row-left-margin">
+    <div class="row">
+      <div class="inline-left">Lunch Break Start Date: {{showDateTime(lunchBreak.startTime)}}</div>
+      <div class="inline">Lunch Break End Date: {{showDateTime(lunchBreak.endTime)}}</div>
+    </div>
+  </div>
+</div>
